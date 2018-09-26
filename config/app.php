@@ -136,6 +136,13 @@ return [
     |
     */
 
+    'quotes' => [
+        'Alex',
+        'John',
+        'Test',
+        'String'
+    ],
+
     'providers' => [
 
         /*
