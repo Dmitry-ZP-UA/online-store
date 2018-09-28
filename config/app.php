@@ -143,6 +143,12 @@ return [
         'String'
     ],
 
+    'questions' => [
+        'What is your name?',
+        'What is your surname?',
+        'How old are you?'
+    ],
+
     'providers' => [
 
         /*
