@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\Quote;
 use App\Console\Commands\Quiz;
+use App\Console\Commands\Healthcheck;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,7 +17,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Quote::class,
-        Quiz::class
+        Quiz::class,
+        Healthcheck::class
     ];
 
     /**
@@ -27,7 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //
+        $schedule->command('urlcode:status')->everyMinute();
     }
 
     /**
