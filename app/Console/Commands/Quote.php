@@ -2,7 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Support\Facades\Log;
+use App\Contract\HTTPClientInterface;
+use App\Services\HTTPClient\GuzzleHTTPClient;
 use Illuminate\Console\Command;
 
 class Quote extends Command
@@ -26,28 +27,24 @@ class Quote extends Command
      *
      * @return void
      */
-    public function __construct()
+
+   private $httpClient;
+
+    public function __construct(HTTPClientInterface $httpClient)
     {
+        $this->httpClient = $httpClient;
+
         parent::__construct();
     }
 
     /**
-     * Execute the console command.
      *
-     * @return mixed
      */
     public function handle()
     {
-        $quotes = $this->getConfig();
+        $url = $this->ask("URL = ");
 
-        $randomQuote = $quotes[array_rand($quotes)];
-
-        Log::info($randomQuote);
-
+        $this->info($this->httpClient->getStatusCode($url));
     }
 
-    public function getConfig()
-    {
-        return config('app.quotes');
-    }
 }
