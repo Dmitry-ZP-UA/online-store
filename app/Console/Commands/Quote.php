@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Facades\StatusCode;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Console\Command;
 
@@ -38,16 +39,9 @@ class Quote extends Command
      */
     public function handle()
     {
-        $quotes = $this->getConfig();
+        $url = $this->ask("URL = ");
 
-        $randomQuote = $quotes[array_rand($quotes)];
-
-        Log::info($randomQuote);
-
+        $this->info(StatusCode::getStatusCode($url));
     }
 
-    public function getConfig()
-    {
-        return config('app.quotes');
-    }
 }
